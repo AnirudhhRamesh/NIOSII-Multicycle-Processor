@@ -98,14 +98,14 @@ begin
     switches : process( opcode, opxcode )
     begin
         case opcode is
-            when x"04" => op_alu <= "000---"; imm_signed <= '1'; --addi rB, rA, imm => rB = rA + (signed)imm
+            when x"04" => op_alu <= "000000"; imm_signed <= '1'; --addi rB, rA, imm => rB = rA + (signed)imm
             when others =>
         end case;
     
         --R-Type Operations
         case opxcode is
-            when x"0E" => op_alu <= "10--01"; imm_signed <= '0'; --and rC, rA, rB R OP R-type 0x3A 0x0E rC ← rA AND rB
-            when x"1B" => op_alu <= "11-011"; imm_signed <= '0'; --srl rC, rA, rB R OP R-type 0x3A 0x1B rC ← (unsigned)rA  rB4..0
+            when x"0E" => op_alu <= "100001"; imm_signed <= '0'; --and rC, rA, rB R OP R-type 0x3A 0x0E rC ← rA AND rB
+            when x"1B" => op_alu <= "110011"; imm_signed <= '0'; --srl rC, rA, rB R OP R-type 0x3A 0x1B rC ← (unsigned)rA  rB4..0
             when x"34" => --BREAK
             when others =>
         end case;

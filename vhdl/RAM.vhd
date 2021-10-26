@@ -15,24 +15,26 @@ end RAM;
 
 architecture synth of RAM is
     type reg_type is array(0 to 1023) of std_logic_vector(31 downto 0);
-    signal reg: reg_type;
-    signal s_cs : std_logic;
-    signal s_read: std_logic;
-    signal s_address: std_logic_vector(9 downto 0);
+    signal reg : reg_type;
+    signal address_prev : unsigned(9 downto 0) := "0000000000";
+    signal cs_and_read : std_logic; 
 begin
 
-    clock: process(clk)
+    rddata <= (others => 'Z') when cs_and_read = '0' else reg(to_integer(unsigned(address_prev)));
+
+    rd: process (clk)
     begin
         if(rising_edge(clk)) then
-            s_cs <= cs;
-            s_read <= read;
-            s_address <= address;
-            if cs = '1' and write = '1' then
-             reg(to_integer(unsigned(address))) <= wrdata;
-            end if; 
+            cs_and_read <= cs and read;
+            
+            if(cs = '1') then
+                if(read = '1') then
+                    address_prev <= unsigned(address);
+                end if;
+                if(write = '1') then
+                    reg(to_integer(unsigned(address))) <= wrdata;
+                end if;
+            end if;
         end if;
-    end process;
-
-    rddata <= reg(to_integer(unsigned(address))) when (s_cs = '1' and s_read = '1') else (others => 'Z');
-
+    end process rd;
 end synth;

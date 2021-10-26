@@ -46,6 +46,6 @@ begin
       end if ;
     end process ; -- PC
 
-    addr <= X"0000" & address when sel_imm = '0' else "00000000000000" & std_logic_vector(shift_left(signed(imm), 2)); --sets 0s to address 31..16
+    addr <= X"0000" & address when sel_imm = '0' else "0000000000000000" & std_logic_vector(shift_left(signed(imm), 2)); --sets 0s to address 31..16
 
 end synth;
