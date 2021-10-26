@@ -15,5 +15,5 @@ begin
     with sel select o <=
     i0 when '0',
     i1 when '1',
-    to_unsigned(0,32) when others;
+    x"00000000" when others;
 end synth;

@@ -13,7 +13,7 @@ end extend;
 architecture synth of extend is
 begin
     with signed select imm32 <=
-    std_logic_vector(resize(unsigned(imm16), imm32'length)) when '0',
-    std_logic_vector(resize(signed(imm16), imm32'length)) when '1',
+    x"0000" & imm16 when '0',
+    x"FFFF" & imm16 when '1',
     (others=> '0') when others;
 end synth;

@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
 
 entity PC is
     port(
@@ -29,10 +30,10 @@ begin
         --Instruction word is available during the next cycle
 
         --reset_n initializes the address register to 0
-        address <= to_unsigned(0,16);
+        address <= std_logic_vector(to_unsigned(0,16));
       elsif( rising_edge(clk) ) then
         if (en = '1') then
-            address <= address + to_unsigned(4,16);
+            address <= address + std_logic_vector(to_unsigned(4,16));
         end if;
       end if ;
     end process ; -- PC
