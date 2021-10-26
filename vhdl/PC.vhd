@@ -23,6 +23,8 @@ architecture synth of PC is
 	 
 begin
     
+    addr <= X"0000" & address; --sets 0s to address 31..16
+    
     PC : process( clk, reset_n )
     begin
       if( reset_n = '0' ) then
@@ -42,6 +44,10 @@ begin
       end if ;
     end process ; -- PC
 
+<<<<<<< HEAD
     addr <= X"0000" & address when sel_imm = '0' else '00000000000000' & std_logic_vector(shift_left(signed(imm), 2)); --sets 0s to address 31..16
+=======
+    
+>>>>>>> 5986383f68fc9abbdc793c81161c22a7b0241b50
 
 end synth;

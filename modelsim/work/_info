@@ -8,129 +8,1137 @@ z2
 !i10f 100
 cModel Technology
 dC:/Users/HP PC/Google Drive/Teaching/ArchOrd Mirjana/3-multicycle_niosII-workinprogress/project_template/modelsim
-Pcheck_functions
-Z0 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
-Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
-Z3 w1473433240
-Z4 dC:/Users/HP PC/Google Drive/Teaching/ArchOrd Mirjana/3-multicycle_niosII/project_template/modelsim
-Z5 8../testbench/check_functions.vhd
-Z6 F../testbench/check_functions.vhd
+Eadd_sub
+Z0 w1633173300
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/modelsim
+Z5 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/add_sub.vhd
+Z6 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/add_sub.vhd
 l0
-L6
-VRYe`2[4U73X[nK3nC6gei3
-!s100 eDnLHELO`V5ohl=5KQY@20
-Z7 OV;C;10.4d;61
-31
-b1
-Z8 !s110 1507121053
+L5
+V207_zj^V^3XmVFBkYPT0^3
+!s100 Ho^oT``GLJUNf<W@=D9Un1
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1635285313
 !i10b 1
-Z9 !s108 1507121053.000000
-Z10 !s90 -reportprogress|300|-93|../testbench/check_functions.vhd|
-Z11 !s107 ../testbench/check_functions.vhd|
+Z9 !s108 1635285313.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/add_sub.vhd|
+Z11 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/add_sub.vhd|
 !i113 1
-o-93
-Z12 tExplicit 1
-Bbody
-Z13 DPx4 work 15 check_functions 0 22 RYe`2[4U73X[nK3nC6gei3
-R0
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Asynth
 R1
 R2
-l0
-L40
-VoehS8`bKGCdlHBEzNX8R21
-!s100 ]Ul<gd[SNh_SV]VQVO[::0
+R3
+DEx4 work 7 add_sub 0 22 207_zj^V^3XmVFBkYPT0^3
+l24
+L16
+V;NR88WJ5VZYOJLbhA=ZV32
+!s100 R7_i2XdR7a<A@agJi^d=R3
 R7
-31
+32
 R8
 !i10b 1
 R9
 R10
 R11
 !i113 1
-o-93
 R12
-Econtroller
-R3
-R1
+R13
+Ealu
+R0
 R2
+R3
 R4
-Z14 8../vhdl/controller.vhd
-Z15 F../vhdl/controller.vhd
+Z14 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ALU.vhd
+Z15 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ALU.vhd
 l0
-L4
-V6FhG[9W_gPzHhLgmk`Tje2
-!s100 iLCb?>B5ja1L5iDVmAU]]0
+L24
+VLIV0?b]kCZ40<iPbTC=4:2
+!s100 O`l`Xc5c_V9`dzon<W_fQ2
 R7
-31
-R8
+32
+Z16 !s110 1635285314
 !i10b 1
 R9
-Z16 !s90 -reportprogress|300|-93|../vhdl/controller.vhd|
-Z17 !s107 ../vhdl/controller.vhd|
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ALU.vhd|
+Z18 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ALU.vhd|
 !i113 1
-o-93
 R12
+R13
+Abdf_type
+R2
+R3
+DEx4 work 3 alu 0 22 LIV0?b]kCZ40<iPbTC=4:2
+l91
+L34
+Vn7Jhlm<g3=Igo4gAY0?Z=3
+!s100 ao^@A8=RSg[FW?jY:[EXI0
+R7
+32
+R16
+!i10b 1
+R9
+R17
+R18
+!i113 1
+R12
+R13
+Ebuttons
+Z19 w1507009760
+R1
+R2
+R3
+R4
+Z20 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/buttons.vhd
+Z21 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/buttons.vhd
+l0
+L5
+V6nKA>6XmzI`j>a@n4^6Pn2
+!s100 =22bV77NIHzbkEY31]2hQ2
+R7
+32
+Z22 !s110 1635285312
+!i10b 1
+Z23 !s108 1635285312.000000
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/buttons.vhd|
+Z25 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/buttons.vhd|
+!i113 1
+R12
+R13
 Asynth
 R1
 R2
-DEx4 work 10 controller 0 22 6FhG[9W_gPzHhLgmk`Tje2
-l40
-L39
-VibgYYLcL07i7zeiJ8oam33
-!s100 I@5[7Rha<4mXjGXY?Ha]m2
+R3
+DEx4 work 7 buttons 0 22 6nKA>6XmzI`j>a@n4^6Pn2
+l31
+L22
+Vz=5DD3`[2T_e1Tj`RUBgR3
+!s100 l:Q7JXKFoP5Z9FQDUXG9]3
+R7
+32
+R22
+!i10b 1
+R23
+R24
+R25
+!i113 1
+R12
+R13
+Pcheck_functions
+Z26 DPx4 ieee 16 std_logic_textio 0 22 V5TSK`;aJKC<l]CEg1>mz1
+R2
+R3
+Z27 w1538965810
+R4
+Z28 8../testbench/check_functions.vhd
+Z29 F../testbench/check_functions.vhd
+l0
+L6
+V6aLKC8M`WFbUTzDPW6He83
+!s100 eDnLHELO`V5ohl=5KQY@20
 R7
 31
-R8
+b1
+Z30 !s110 1635285345
 !i10b 1
-R9
-R16
-R17
+Z31 !s108 1635285345.000000
+Z32 !s90 -reportprogress|300|-93|../testbench/check_functions.vhd|
+Z33 !s107 ../testbench/check_functions.vhd|
 !i113 1
 o-93
-R12
-Etb_controller
-R3
 R13
-R0
-Z18 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Bbody
+Z34 DPx4 work 15 check_functions 0 22 6aLKC8M`WFbUTzDPW6He83
+R26
+R2
+R3
+l0
+L40
+Vl_?7YlfeIC=0oLhh:^F<e2
+!s100 ]Ul<gd[SNh_SV]VQVO[::0
+R7
+31
+R30
+!i10b 1
+R31
+R32
+R33
+!i113 1
+o-93
+R13
+Ecomparator
+Z35 w1633270254
+R2
+R3
+R4
+Z36 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/comparator.vhd
+Z37 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/comparator.vhd
+l0
+L4
+V3WXakLjKGIMC9fTC_zAJG3
+!s100 XTWoF>RX1>LcmLLBBo;N:0
+R7
+32
+R16
+!i10b 1
+Z38 !s108 1635285314.000000
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/comparator.vhd|
+Z40 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/comparator.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 10 comparator 0 22 3WXakLjKGIMC9fTC_zAJG3
+l17
+L16
+VdIT[c[^:b2:=aVG;Jd@>;1
+!s100 R;IiafEnL@]aff7?Cc`^J1
+R7
+32
+R16
+!i10b 1
+R38
+R39
+R40
+!i113 1
+R12
+R13
+Econtroller
+Z41 w1635285282
+R2
+R3
+R4
+Z42 8../vhdl/controller.vhd
+Z43 F../vhdl/controller.vhd
+l0
+L4
+V>:mGA0fg1bnEUkAc9L0EZ3
+!s100 iLCb?>B5ja1L5iDVmAU]]0
+R7
+31
+R30
+!i10b 1
+R31
+Z44 !s90 -reportprogress|300|-93|../vhdl/controller.vhd|
+Z45 !s107 ../vhdl/controller.vhd|
+!i113 1
+o-93
+R13
+Asynth
+R2
+R3
+DEx4 work 10 controller 0 22 >:mGA0fg1bnEUkAc9L0EZ3
+l46
+L39
+VjhmDM5eDBYY]D7@?FL=YU1
+!s100 FU1VMEAi[2AMoNV45FXa72
+R7
+31
+R30
+!i10b 1
+R31
+R44
+R45
+!i113 1
+o-93
+R13
+Ecpu
+Z46 w1538965812
+R2
+R3
+R4
+Z47 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/CPU.vhd
+Z48 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/CPU.vhd
+l0
+L24
+VoN1Z@H62cOJ8j76FSZXfk0
+!s100 ?^3E^YkUK_jO8j=PLQg0X0
+R7
+32
+R22
+!i10b 1
+R23
+Z49 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/CPU.vhd|
+Z50 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/CPU.vhd|
+!i113 1
+R12
+R13
+Abdf_type
+R2
+R3
+DEx4 work 3 cpu 0 22 oN1Z@H62cOJ8j76FSZXfk0
+l168
+L37
+VU_VbP>G_0>o[AHnGEJ`7A2
+!s100 nj]fOeJzKgV2QQoiYJ37e2
+R7
+32
+R22
+!i10b 1
+R23
+R49
+R50
+!i113 1
+R12
+R13
+Edecoder
+Z51 w1635243243
+R2
+R3
+R4
+Z52 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/decoder.vhd
+Z53 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/decoder.vhd
+l0
+L4
+VSg<AcAL[fZ1zMI?UhfBNi0
+!s100 jK;jV5kd1ZOaK]FLU5e2@3
+R7
+32
+R16
+!i10b 1
+R38
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/decoder.vhd|
+Z55 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/decoder.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 7 decoder 0 22 Sg<AcAL[fZ1zMI?UhfBNi0
+l15
+L14
+Vgn3WI_FgkOFBoZPf`zQ@m2
+!s100 HWQe[43dJIKz=5eTT9WNN3
+R7
+32
+R16
+!i10b 1
+R38
+R54
+R55
+!i113 1
+R12
+R13
+Eextend
+Z56 w1635272760
 R1
 R2
+R3
 R4
-Z19 8../testbench/tb_Controller.vhd
-Z20 F../testbench/tb_Controller.vhd
+Z57 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd
+Z58 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd
+l0
+L5
+VX3=18WCKDhE6QN:cFX_=<2
+!s100 P4n^;>0BoJaz2if>N4<fo0
+R7
+32
+R22
+!i10b 1
+R23
+Z59 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd|
+Z60 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd|
+!i113 1
+R12
+R13
+Asynth
+R1
+R2
+R3
+DEx4 work 6 extend 0 22 X3=18WCKDhE6QN:cFX_=<2
+l14
+L13
+V50V^IZB4NK1?TdJgmV>Jj3
+!s100 m4a;f_6mggZSA?Z;2]2aO2
+R7
+32
+R22
+!i10b 1
+R23
+R59
+R60
+!i113 1
+R12
+R13
+Egecko
+Z61 w1633471178
+R2
+R3
+R4
+Z62 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/GECKO.vhd
+Z63 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/GECKO.vhd
+l0
+L25
+VUUo[=d8;JL2NUd?KL5z>W3
+!s100 LSB69=RnS?7B=e740[]>J0
+R7
+32
+R22
+!i10b 1
+R23
+Z64 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/GECKO.vhd|
+Z65 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/GECKO.vhd|
+!i113 1
+R12
+R13
+Abdf_type
+R2
+R3
+Z66 DEx4 work 5 gecko 0 22 UUo[=d8;JL2NUd?KL5z>W3
+l122
+L42
+VXW8hfda?:0fgXTELaMc<M2
+!s100 6_aIkK46>FzI3D:<OBG:Z1
+R7
+32
+R22
+!i10b 1
+R23
+R64
+R65
+!i113 1
+R12
+R13
+Eir
+Z67 w1635150426
+R2
+R3
+R4
+Z68 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd
+Z69 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd
+l0
+L4
+V^D0Sz[@@D76hLF6hc_Qm`1
+!s100 g>VC3<ZiU9SUL1eB^Hc9_3
+R7
+32
+R22
+!i10b 1
+R23
+Z70 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd|
+Z71 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 2 ir 0 22 ^D0Sz[@@D76hLF6hc_Qm`1
+l14
+L13
+VUo7oCThJaVg@FKdh:IJ>_1
+!s100 Zd7TXjW45V4djRG:eCAHO3
+R7
+32
+R22
+!i10b 1
+R23
+R70
+R71
+!i113 1
+R12
+R13
+Eleds
+R61
+R1
+R2
+R3
+R4
+Z72 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/LEDs.vhd
+Z73 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/LEDs.vhd
+l0
+L5
+V82^IRfHNag^>;Yc>Z[nm>3
+!s100 LBhnQz<diU;5h1EbFfFEW1
+R7
+32
+R16
+!i10b 1
+R38
+Z74 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/LEDs.vhd|
+Z75 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/LEDs.vhd|
+!i113 1
+R12
+R13
+Asynth
+R1
+R2
+R3
+DEx4 work 4 leds 0 22 82^IRfHNag^>;Yc>Z[nm>3
+l35
+L22
+V>3f<EDDzh?fl>Y0i[ad233
+!s100 >nX>UXM`h;^[mnM>habSd1
+R7
+32
+R16
+!i10b 1
+R38
+R74
+R75
+!i113 1
+R12
+R13
+Elogic_unit
+R0
+R2
+R3
+R4
+Z76 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd
+Z77 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd
+l0
+L4
+VfUEL39DQfcR_XLk:Hoe<f3
+!s100 UJioXKUg8XUULGTSe2WE20
+R7
+32
+R16
+!i10b 1
+R38
+Z78 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd|
+Z79 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 10 logic_unit 0 22 fUEL39DQfcR_XLk:Hoe<f3
+l14
+L13
+VQYnZAL1W:i`oD]AJ2@azL3
+!s100 WoM^mQ<h5cGHi3SNd68W81
+R7
+32
+R16
+!i10b 1
+R38
+R78
+R79
+!i113 1
+R12
+R13
+Emultiplexer
+Z80 w1633270522
+R2
+R3
+R4
+Z81 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/multiplexer.vhd
+Z82 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/multiplexer.vhd
+l0
+L4
+V4iH6`nZgBAHVia??bJk>G2
+!s100 UDM^5ga=kb9Z[=K^]bghV0
+R7
+32
+R16
+!i10b 1
+R38
+Z83 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/multiplexer.vhd|
+Z84 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/multiplexer.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 11 multiplexer 0 22 4iH6`nZgBAHVia??bJk>G2
+l16
+L15
+VTDnFKd5k6HSYTF8gFdQCM2
+!s100 JA8DATY2m@P5I1aK[_=IX2
+R7
+32
+R16
+!i10b 1
+R38
+R83
+R84
+!i113 1
+R12
+R13
+Emux2x16
+Z85 w1635268207
+R2
+R3
+R4
+Z86 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x16.vhd
+Z87 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x16.vhd
+l0
+L4
+VaHOL`3MF?g?d`[6<SJm^e1
+!s100 ]AkMHg3_OS9:k6cjVd[b:3
+R7
+32
+R22
+!i10b 1
+R23
+Z88 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x16.vhd|
+Z89 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x16.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 7 mux2x16 0 22 aHOL`3MF?g?d`[6<SJm^e1
+l14
+L13
+VT07S35dHhHn_<=KJLMS0l1
+!s100 6OWCc72R:eoP0NQK4FiHl3
+R7
+32
+R22
+!i10b 1
+R23
+R88
+R89
+!i113 1
+R12
+R13
+Emux2x32
+R85
+R2
+R3
+R4
+Z90 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x32.vhd
+Z91 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x32.vhd
+l0
+L4
+V5<9;E?13m3J1aF01KEAAR1
+!s100 Iab^5l@hZCaSi22IEjFiN0
+R7
+32
+R22
+!i10b 1
+R23
+Z92 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x32.vhd|
+Z93 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x32.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 7 mux2x32 0 22 5<9;E?13m3J1aF01KEAAR1
+l14
+L13
+Vg^YZkon?IZF6NeNeEma?M1
+!s100 hN;jhF7Fn8XcW1MO^c75O2
+R7
+32
+R22
+!i10b 1
+R23
+R92
+R93
+!i113 1
+R12
+R13
+Emux2x5
+Z94 w1635143158
+R2
+R3
+R4
+Z95 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x5.vhd
+Z96 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x5.vhd
+l0
+L4
+VW@GMgb]B=<MlVOlGRRM2i3
+!s100 A96?gLbg3Wafg>1JToSDm3
+R7
+32
+R22
+!i10b 1
+R23
+Z97 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x5.vhd|
+Z98 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x5.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 6 mux2x5 0 22 W@GMgb]B=<MlVOlGRRM2i3
+l14
+L13
+VAz8[29>8UiY<:ek^g>L`30
+!s100 hNgb>L7:mbO4H>3T>0Nea1
+R7
+32
+R22
+!i10b 1
+R23
+R97
+R98
+!i113 1
+R12
+R13
+Epc
+Z99 w1635283396
+Z100 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z101 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+R1
+R2
+R3
+R4
+Z102 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd
+Z103 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd
+l0
+L6
+VJ6bdVU;3ObA:RS;8;lz]^2
+!s100 TFRS`N3ZTYac35^MbE_><0
+R7
+32
+R8
+!i10b 1
+R23
+Z104 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd|
+Z105 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd|
+!i113 1
+R12
+R13
+Asynth
+R100
+R101
+R1
+R2
+R3
+DEx4 work 2 pc 0 22 J6bdVU;3ObA:RS;8;lz]^2
+l24
+L20
+V6e=O:T9Gk0]W1=AN?N41h0
+!s100 dMTE8S9MiJ3WlLS4f^:NP1
+R7
+32
+R8
+!i10b 1
+R23
+R104
+R105
+!i113 1
+R12
+R13
+Eram
+Z106 w1635285269
+R1
+R2
+R3
+R4
+Z107 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd
+Z108 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd
+l0
+L5
+VJiWAmLGUWmdVPB8L2QZ[D3
+!s100 9O>00CFElD4PLMkihiTWm3
+R7
+32
+R16
+!i10b 1
+R38
+Z109 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd|
+Z110 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd|
+!i113 1
+R12
+R13
+Asynth
+R1
+R2
+R3
+DEx4 work 3 ram 0 22 JiWAmLGUWmdVPB8L2QZ[D3
+l21
+L16
+VTA7;:Bga3>bl@2H1mZo^f1
+!s100 h=CCl6ef;bGQ3X3ncJO?72
+R7
+32
+R16
+!i10b 1
+R38
+R109
+R110
+!i113 1
+R12
+R13
+Eregister_file
+Z111 w1635285289
+R1
+R2
+R3
+R4
+Z112 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/register_file.vhd
+Z113 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/register_file.vhd
+l0
+L5
+VhQYRZ<6ijZW2:hk46k4IZ2
+!s100 _;mToXbZzY:WVO^oMIJ;J3
+R7
+32
+R16
+!i10b 1
+R38
+Z114 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/register_file.vhd|
+Z115 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/register_file.vhd|
+!i113 1
+R12
+R13
+Asynth
+R1
+R2
+R3
+DEx4 work 13 register_file 0 22 hQYRZ<6ijZW2:hk46k4IZ2
+l21
+L18
+V42J5b`afZbV`CD;^zFj8j2
+!s100 Zo1CAPceBS=mLW3YVdM2<0
+R7
+32
+R16
+!i10b 1
+R38
+R114
+R115
+!i113 1
+R12
+R13
+Erom
+Z116 w1635285279
+R2
+R3
+R4
+Z117 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM.vhd
+Z118 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM.vhd
+l0
+L4
+VLD>LKJh0<<KfR_G::f?6B1
+!s100 LzhnA0@bLeKPHkcXf<L3g3
+R7
+32
+R16
+!i10b 1
+R38
+Z119 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM.vhd|
+Z120 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM.vhd|
+!i113 1
+R12
+R13
+Asynth
+R2
+R3
+DEx4 work 3 rom 0 22 LD>LKJh0<<KfR_G::f?6B1
+l29
+L14
+VmcB^V4RQlRFc>J_PbeDT_1
+!s100 kH;?7I`W6:ROW]V0gGhk60
+R7
+32
+R16
+!i10b 1
+R38
+R119
+R120
+!i113 1
+R12
+R13
+Erom_block
+Z121 w1476134002
+R2
+R3
+R4
+Z122 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd
+Z123 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd
+l0
+L42
+VCf[gZ]hQBZigaT1P:e9O01
+!s100 Fb1^C3b1G3KcM]0dFoPHV2
+R7
+32
+R16
+!i10b 1
+R38
+Z124 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd|
+Z125 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd|
+!i113 1
+R12
+R13
+Asyn
+R2
+R3
+DEx4 work 9 rom_block 0 22 Cf[gZ]hQBZigaT1P:e9O01
+l82
+L52
+VZKBR7P0EaE;PJMf_Ho4411
+!s100 2O9W8o5<`cI7Pb0TBCEoL0
+R7
+32
+R16
+!i10b 1
+R38
+R124
+R125
+!i113 1
+R12
+R13
+Eshift_unit
+R0
+R1
+R2
+R3
+R4
+Z126 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd
+Z127 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd
+l0
+L5
+VoYz=ZP:Rg2U9Eb=ZGo>940
+!s100 C4@E7NN0:UB89P^MW405S0
+R7
+32
+R16
+!i10b 1
+R38
+Z128 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd|
+Z129 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd|
+!i113 1
+R12
+R13
+Asynth
+R1
+R2
+R3
+DEx4 work 10 shift_unit 0 22 oYz=ZP:Rg2U9Eb=ZGo>940
+l15
+L14
+V@nFV=K3:Z_d6IjB;3@zU;3
+!s100 [321mfnCdb31EL<HVmGPL3
+R7
+32
+R16
+!i10b 1
+R38
+R128
+R129
+!i113 1
+R12
+R13
+Etb_controller
+R27
+R34
+R26
+R1
+R2
+R3
+R4
+Z130 8../testbench/tb_Controller.vhd
+Z131 F../testbench/tb_Controller.vhd
 l0
 L9
-V0>@NJz45o9SWL71JJI]AM2
+V3E@KN_PfWzKDMi@e_IcgN1
 !s100 QPYMI?@zF<fA]gVd9c[kS0
 R7
 31
-Z21 !s110 1507121054
+R30
 !i10b 1
-Z22 !s108 1507121054.000000
-Z23 !s90 -reportprogress|300|-93|../testbench/tb_Controller.vhd|
-Z24 !s107 ../testbench/tb_Controller.vhd|
+R31
+Z132 !s90 -reportprogress|300|-93|../testbench/tb_Controller.vhd|
+Z133 !s107 ../testbench/tb_Controller.vhd|
 !i113 1
 o-93
-R12
-Atestbench
 R13
-R0
-R18
+Atestbench
+R34
+R26
 R1
 R2
-DEx4 work 13 tb_controller 0 22 0>@NJz45o9SWL71JJI]AM2
+R3
+Z134 DEx4 work 13 tb_controller 0 22 3E@KN_PfWzKDMi@e_IcgN1
 l102
 L15
-VGiWKHEGIT74Di1J2SFIlH1
-!s100 _WkzDDFBPd:3LHMWS[AoW2
+Z135 V3M1BHZOYlAHk5ZM;AdXib3
+Z136 !s100 _WkzDDFBPd:3LHMWS[AoW2
 R7
 31
-R21
+R30
 !i10b 1
-R22
-R23
-R24
+R31
+R132
+R133
 !i113 1
 o-93
+R13
+Etb_extend
+R27
+Z137 DPx4 work 15 check_functions 0 22 <W1[dk2LN3hi[c?7kCXRb3
+R26
+R2
+R3
+R4
+Z138 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_Extend.vhd
+Z139 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_Extend.vhd
+l0
+L8
+Vaaa357Ec4Z]hSVLzLa]`V0
+!s100 bW1ZJ800R3O0<C<7nO4h:1
+R7
+32
+R8
+!i10b 1
+R9
+Z140 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_Extend.vhd|
+Z141 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_Extend.vhd|
+!i113 1
 R12
+R13
+Atestbench
+R137
+R26
+R2
+R3
+DEx4 work 9 tb_extend 0 22 aaa357Ec4Z]hSVLzLa]`V0
+l31
+L11
+VSUC:NKCMTg8:IYKgIcGd30
+!s100 f><EEJh?:BbXgSC^g?0XG2
+R7
+32
+R8
+!i10b 1
+R9
+R140
+R141
+!i113 1
+R12
+R13
+Etb_gecko
+R46
+R2
+R3
+R4
+Z142 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_GECKO.vhd
+Z143 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_GECKO.vhd
+l0
+L4
+V5Tbz7Kl=147iIIz>>A8Y[3
+!s100 M92[;29_Yc:FoKCCIgj]?0
+R7
+32
+R8
+!i10b 1
+R9
+Z144 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_GECKO.vhd|
+Z145 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_GECKO.vhd|
+!i113 1
+R12
+R13
+Atestbench
+R66
+R2
+R3
+DEx4 work 8 tb_gecko 0 22 5Tbz7Kl=147iIIz>>A8Y[3
+l14
+L7
+V6fQEk`>ELI8^:O]bcf[0k0
+!s100 1395I=^FjK==Lo:2:Ck6c3
+R7
+32
+R8
+!i10b 1
+R9
+R144
+R145
+!i113 1
+R12
+R13
+Etb_ir
+R46
+R137
+R26
+R2
+R3
+R4
+Z146 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_IR.vhd
+Z147 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_IR.vhd
+l0
+L8
+VNa]DdS==`51QO9@9@NCYO3
+!s100 dO7:P:CO76Dg9T_Q>3Mi:2
+R7
+32
+R8
+!i10b 1
+R9
+Z148 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_IR.vhd|
+Z149 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_IR.vhd|
+!i113 1
+R12
+R13
+Atestbench
+R137
+R26
+R2
+R3
+DEx4 work 5 tb_ir 0 22 Na]DdS==`51QO9@9@NCYO3
+l32
+L11
+VFC]h]m]T]Ph2`Z>Ki^a?Z2
+!s100 g?YUbkdlEmZ2JbBY[dbba0
+R7
+32
+R8
+!i10b 1
+R9
+R148
+R149
+!i113 1
+R12
+R13
+Etb_pc
+R46
+R137
+R26
+R2
+R3
+R4
+Z150 8D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_PC.vhd
+Z151 FD:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_PC.vhd
+l0
+L8
+VZbiH9]DK4fmMF;^e8W7zF1
+!s100 _Sjg^6a@flK7I1KVlG]Sm2
+R7
+32
+R8
+!i10b 1
+R9
+Z152 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_PC.vhd|
+Z153 !s107 D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/testbench/tb_PC.vhd|
+!i113 1
+R12
+R13
+Atestbench
+R137
+R26
+R2
+R3
+DEx4 work 5 tb_pc 0 22 ZbiH9]DK4fmMF;^e8W7zF1
+l42
+L11
+V;4TRg:;B=`LN4JkHFOfZH3
+!s100 gKH@n?YGO`P>Bz<MRbX@K0
+R7
+32
+R8
+!i10b 1
+R9
+R152
+R153
+!i113 1
+R12
+R13

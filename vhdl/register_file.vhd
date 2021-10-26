@@ -19,7 +19,6 @@ architecture synth of register_file is
     type reg_type is array(0 to 31) of std_logic_vector(31 downto 0);
     signal reg: reg_type;
 begin
-    reg(0) <= (others => '0');
 
     a <= reg(to_integer(unsigned(aa)));
     b <= reg(to_integer(unsigned(ab)));
@@ -27,10 +26,10 @@ begin
     clock: process(clk)
     begin
         if rising_edge(clk) then
-         if wren = '1' and aw /= "00000" then 
-          reg(to_integer(unsigned(aw))) <= wrdata;
-          elsif wren = '1' and aw = "00000" then 
-          reg(to_integer(unsigned(aw))) <= (others => '0');     
+         if wren = '1' and to_integer(unsigned(aw)) /= 0 then 
+				reg(to_integer(unsigned(aw))) <= wrdata;
+         elsif wren = '1' and to_integer(unsigned(aw)) = 0 then 
+				reg(0) <= (others => '0');     
          end if;
         end if;
     end process;

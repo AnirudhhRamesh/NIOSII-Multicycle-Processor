@@ -1,5 +1,5 @@
 Analysis & Synthesis report for GECKO
-Tue Oct 26 14:35:11 2021
+Tue Oct 26 23:54:11 2021
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -10,7 +10,20 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. State Machine - |GECKO|CPU:inst|controller:controller_0|s_cur_state
+  6. User-Specified and Inferred Latches
+  7. Registers Added for RAM Pass-Through Logic
+  8. Registers Packed Into Inferred Megafunctions
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Source assignments for ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated
+ 11. Source assignments for CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0|altsyncram_trd1:auto_generated
+ 12. Source assignments for CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_1|altsyncram_trd1:auto_generated
+ 13. Parameter Settings for User Entity Instance: ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component
+ 14. Parameter Settings for Inferred Entity Instance: CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0
+ 15. Parameter Settings for Inferred Entity Instance: CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_1
+ 16. altsyncram Parameter Settings by Entity Instance
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
 
 
 
@@ -36,7 +49,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Tue Oct 26 14:35:11 2021           ;
+; Analysis & Synthesis Status        ; Failed - Tue Oct 26 23:54:11 2021           ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; GECKO                                       ;
 ; Top-level Entity Name              ; GECKO                                       ;
@@ -155,13 +168,425 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |GECKO|CPU:inst|controller:controller_0|s_cur_state                                                                                                                                     ;
++--------------------+-------------------+-------------------+-------------------+-------------------+------------------+------------------+--------------------+--------------------+--------------------+
+; Name               ; s_cur_state.BREAK ; s_cur_state.STORE ; s_cur_state.LOAD2 ; s_cur_state.LOAD1 ; s_cur_state.R_OP ; s_cur_state.I_OP ; s_cur_state.DECODE ; s_cur_state.FETCH2 ; s_cur_state.FETCH1 ;
++--------------------+-------------------+-------------------+-------------------+-------------------+------------------+------------------+--------------------+--------------------+--------------------+
+; s_cur_state.FETCH1 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                ; 0                ; 0                  ; 0                  ; 0                  ;
+; s_cur_state.FETCH2 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                ; 0                ; 0                  ; 1                  ; 1                  ;
+; s_cur_state.DECODE ; 0                 ; 0                 ; 0                 ; 0                 ; 0                ; 0                ; 1                  ; 0                  ; 1                  ;
+; s_cur_state.I_OP   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                ; 1                ; 0                  ; 0                  ; 1                  ;
+; s_cur_state.R_OP   ; 0                 ; 0                 ; 0                 ; 0                 ; 1                ; 0                ; 0                  ; 0                  ; 1                  ;
+; s_cur_state.LOAD1  ; 0                 ; 0                 ; 0                 ; 1                 ; 0                ; 0                ; 0                  ; 0                  ; 1                  ;
+; s_cur_state.LOAD2  ; 0                 ; 0                 ; 1                 ; 0                 ; 0                ; 0                ; 0                  ; 0                  ; 1                  ;
+; s_cur_state.STORE  ; 0                 ; 1                 ; 0                 ; 0                 ; 0                ; 0                ; 0                  ; 0                  ; 1                  ;
+; s_cur_state.BREAK  ; 1                 ; 0                 ; 0                 ; 0                 ; 0                ; 0                ; 0                  ; 0                  ; 1                  ;
++--------------------+-------------------+-------------------+-------------------+-------------------+------------------+------------------+--------------------+--------------------+--------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                                  ;
++----------------------------------------------------+----------------------------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal                    ; Free of Timing Hazards ;
++----------------------------------------------------+----------------------------------------+------------------------+
+; CPU:inst|controller:controller_0|op_alu[4]         ; CPU:inst|controller:controller_0|Mux11 ; yes                    ;
+; CPU:inst|controller:controller_0|op_alu[1]         ; CPU:inst|controller:controller_0|Mux0  ; yes                    ;
+; CPU:inst|controller:controller_0|op_alu[0]         ; CPU:inst|controller:controller_0|Mux0  ; yes                    ;
+; CPU:inst|controller:controller_0|op_alu[5]         ; CPU:inst|controller:controller_0|Mux11 ; yes                    ;
+; CPU:inst|controller:controller_0|imm_signed        ; CPU:inst|controller:controller_0|Mux11 ; yes                    ;
+; Number of user-specified and inferred latches = 5  ;                                        ;                        ;
++----------------------------------------------------+----------------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Registers Added for RAM Pass-Through Logic                                                                     ;
++-------------------------------------------------------------+--------------------------------------------------+
+; Register Name                                               ; RAM Name                                         ;
++-------------------------------------------------------------+--------------------------------------------------+
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[0]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[1]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[2]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[3]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[4]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[5]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[6]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[7]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[8]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[9]  ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[10] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[11] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[12] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[13] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[14] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[15] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[16] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[17] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[18] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[19] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[20] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[21] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[22] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[23] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[24] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[25] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[26] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[27] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[28] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[29] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[30] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[31] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[32] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[33] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[34] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[35] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[36] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[37] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[38] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[39] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[40] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[41] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[42] ; CPU:inst|register_file:register_file_0|reg_rtl_0 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[0]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[1]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[2]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[3]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[4]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[5]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[6]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[7]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[8]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[9]  ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[10] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[11] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[12] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[13] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[14] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[15] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[16] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[17] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[18] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[19] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[20] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[21] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[22] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[23] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[24] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[25] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[26] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[27] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[28] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[29] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[30] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[31] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[32] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[33] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[34] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[35] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[36] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[37] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[38] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[39] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[40] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[41] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
+; CPU:inst|register_file:register_file_0|reg_rtl_1_bypass[42] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ;
++-------------------------------------------------------------+--------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions                                         ;
++----------------------------+--------------------------------------------------+------+
+; Register Name              ; Megafunction                                     ; Type ;
++----------------------------+--------------------------------------------------+------+
+; CPU:inst|IR:IR_0|Q[27..31] ; CPU:inst|register_file:register_file_0|reg_rtl_1 ; RAM  ;
++----------------------------+--------------------------------------------------+------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |GECKO|CPU:inst|controller:controller_0|rf_wren           ;
+; 4:1                ; 24 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; No         ; |GECKO|LEDs:LEDs_0|Mux20                                  ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |GECKO|LEDs:LEDs_0|Mux24                                  ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |GECKO|CPU:inst|register_file:register_file_0|reg         ;
+; 6:1                ; 15 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |GECKO|CPU:inst|ALU:alu_0|multiplexer:multiplexer_0|Mux21 ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |GECKO|CPU:inst|register_file:register_file_0|reg         ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |GECKO|CPU:inst|controller:controller_0|Mux12             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                       ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                        ;
++---------------------------------+--------------------+------+----------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Source assignments for CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0|altsyncram_trd1:auto_generated ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                  ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                   ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Source assignments for CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_1|altsyncram_trd1:auto_generated ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                  ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                   ;
++---------------------------------+--------------------+------+-----------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+---------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                              ;
++------------------------------------+----------------------+---------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                           ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                        ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                      ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                      ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                    ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                           ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                                           ;
+; WIDTH_A                            ; 32                   ; Signed Integer                                    ;
+; WIDTHAD_A                          ; 10                   ; Signed Integer                                    ;
+; NUMWORDS_A                         ; 1024                 ; Signed Integer                                    ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                           ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                           ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                           ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                           ;
+; WIDTH_B                            ; 1                    ; Untyped                                           ;
+; WIDTHAD_B                          ; 1                    ; Untyped                                           ;
+; NUMWORDS_B                         ; 1                    ; Untyped                                           ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                           ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                           ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                           ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                                           ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                           ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                           ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                           ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                           ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                           ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                           ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                    ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                           ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                           ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                           ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                           ;
+; INIT_FILE                          ; ../quartus/ROM.hex   ; Untyped                                           ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                           ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                           ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                           ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                           ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                                           ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                           ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                           ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                           ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                           ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                           ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                           ;
+; DEVICE_FAMILY                      ; Cyclone IV E         ; Untyped                                           ;
+; CBXI_PARAMETER                     ; altsyncram_rna1      ; Untyped                                           ;
++------------------------------------+----------------------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0 ;
++------------------------------------+----------------------+--------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                             ;
++------------------------------------+----------------------+--------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                          ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                       ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                     ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                     ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                   ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                          ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                          ;
+; WIDTH_A                            ; 32                   ; Untyped                                          ;
+; WIDTHAD_A                          ; 5                    ; Untyped                                          ;
+; NUMWORDS_A                         ; 32                   ; Untyped                                          ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                          ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                          ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                          ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                          ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                          ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                          ;
+; WIDTH_B                            ; 32                   ; Untyped                                          ;
+; WIDTHAD_B                          ; 5                    ; Untyped                                          ;
+; NUMWORDS_B                         ; 32                   ; Untyped                                          ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                          ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                          ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                          ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                                          ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                          ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                          ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                          ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                          ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                          ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                          ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                          ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                          ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                          ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                          ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                          ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                          ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                          ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                          ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                          ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                          ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                          ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                          ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                          ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                          ;
+; DEVICE_FAMILY                      ; Cyclone IV E         ; Untyped                                          ;
+; CBXI_PARAMETER                     ; altsyncram_trd1      ; Untyped                                          ;
++------------------------------------+----------------------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_1 ;
++------------------------------------+----------------------+--------------------------------------------------+
+; Parameter Name                     ; Value                ; Type                                             ;
++------------------------------------+----------------------+--------------------------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                          ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                       ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                     ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                     ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                   ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                                          ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                          ;
+; WIDTH_A                            ; 32                   ; Untyped                                          ;
+; WIDTHAD_A                          ; 5                    ; Untyped                                          ;
+; NUMWORDS_A                         ; 32                   ; Untyped                                          ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                          ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                          ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                          ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                          ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                                          ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                          ;
+; WIDTH_B                            ; 32                   ; Untyped                                          ;
+; WIDTHAD_B                          ; 5                    ; Untyped                                          ;
+; NUMWORDS_B                         ; 32                   ; Untyped                                          ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                                          ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                          ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                          ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                                          ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                          ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                          ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                                          ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                          ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                          ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                          ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                          ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                          ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                                          ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                                          ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                          ;
+; BYTE_SIZE                          ; 8                    ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                          ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                          ;
+; INIT_FILE                          ; UNUSED               ; Untyped                                          ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                          ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                                          ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                                          ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                          ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                          ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                                          ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                          ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                                          ;
+; DEVICE_FAMILY                      ; Cyclone IV E         ; Untyped                                          ;
+; CBXI_PARAMETER                     ; altsyncram_trd1      ; Untyped                                          ;
++------------------------------------+----------------------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                                             ;
++-------------------------------------------+------------------------------------------------------------------+
+; Name                                      ; Value                                                            ;
++-------------------------------------------+------------------------------------------------------------------+
+; Number of entity instances                ; 3                                                                ;
+; Entity Instance                           ; ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; ROM                                                              ;
+;     -- WIDTH_A                            ; 32                                                               ;
+;     -- NUMWORDS_A                         ; 1024                                                             ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                     ;
+;     -- WIDTH_B                            ; 1                                                                ;
+;     -- NUMWORDS_B                         ; 1                                                                ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                                           ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                     ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                             ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                        ;
+; Entity Instance                           ; CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0      ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                                                        ;
+;     -- WIDTH_A                            ; 32                                                               ;
+;     -- NUMWORDS_A                         ; 32                                                               ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                     ;
+;     -- WIDTH_B                            ; 32                                                               ;
+;     -- NUMWORDS_B                         ; 32                                                               ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                                           ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                     ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                             ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                        ;
+; Entity Instance                           ; CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_1      ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                                                        ;
+;     -- WIDTH_A                            ; 32                                                               ;
+;     -- NUMWORDS_A                         ; 32                                                               ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                     ;
+;     -- WIDTH_B                            ; 32                                                               ;
+;     -- NUMWORDS_B                         ; 32                                                               ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                                           ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                     ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                                             ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                        ;
++-------------------------------------------+------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:23     ;
++----------------+--------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Tue Oct 26 14:35:00 2021
+    Info: Processing started: Tue Oct 26 23:53:35 2021
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off GECKO -c GECKO
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -187,8 +612,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
     Info (12022): Found design unit 1: decoder-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/decoder.vhd Line: 14
     Info (12023): Found entity 1: decoder File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/decoder.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file /users/anirudhh/documents/epfl/ba3/comparch/labs/lab4/template/vhdl/extend.vhd
-    Info (12022): Found design unit 1: extend-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 12
-    Info (12023): Found entity 1: extend File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 4
+    Info (12022): Found design unit 1: extend-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 13
+    Info (12023): Found entity 1: extend File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file /users/anirudhh/documents/epfl/ba3/comparch/labs/lab4/template/vhdl/ir.vhd
     Info (12022): Found design unit 1: IR-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 13
     Info (12023): Found entity 1: IR File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 4
@@ -211,8 +636,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
     Info (12022): Found design unit 1: mux2x32-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x32.vhd Line: 13
     Info (12023): Found entity 1: mux2x32 File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/mux2x32.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file /users/anirudhh/documents/epfl/ba3/comparch/labs/lab4/template/vhdl/pc.vhd
-    Info (12022): Found design unit 1: PC-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 19
-    Info (12023): Found entity 1: PC File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 5
+    Info (12022): Found design unit 1: PC-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 20
+    Info (12023): Found entity 1: PC File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file /users/anirudhh/documents/epfl/ba3/comparch/labs/lab4/template/vhdl/ram.vhd
     Info (12022): Found design unit 1: RAM-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd Line: 16
     Info (12023): Found entity 1: RAM File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd Line: 5
@@ -228,14 +653,193 @@ Info (12021): Found 2 design units, including 1 entities, in source file /users/
 Info (12021): Found 2 design units, including 1 entities, in source file /users/anirudhh/documents/epfl/ba3/comparch/labs/lab4/template/vhdl/shift_unit.vhd
     Info (12022): Found design unit 1: shift_unit-synth File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd Line: 14
     Info (12023): Found entity 1: shift_unit File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd Line: 5
-Error (10482): VHDL error at extend.vhd(15): object "resize" is used but not declared File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 15
-Error (10411): VHDL Type Conversion error at extend.vhd(15): can't determine type of object or expression near text or symbol "std_logic_vector" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 15
-Error (10482): VHDL error at extend.vhd(16): object "resize" is used but not declared File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 16
-Error (10411): VHDL Type Conversion error at extend.vhd(16): can't determine type of object or expression near text or symbol "std_logic_vector" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/extend.vhd Line: 16
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 4 errors, 1 warning
-    Error: Peak virtual memory: 4777 megabytes
-    Error: Processing ended: Tue Oct 26 14:35:11 2021
-    Error: Elapsed time: 00:00:11
-    Error: Total CPU time (on all processors): 00:00:24
+Info (12127): Elaborating entity "GECKO" for the top level hierarchy
+Info (12128): Elaborating entity "LEDs" for hierarchy "LEDs:LEDs_0"
+Info (12128): Elaborating entity "decoder" for hierarchy "decoder:decoder_0"
+Info (12128): Elaborating entity "CPU" for hierarchy "CPU:inst"
+Info (12128): Elaborating entity "controller" for hierarchy "CPU:inst|controller:controller_0"
+Warning (10631): VHDL Process Statement warning at controller.vhd(98): inferring latch(es) for signal or variable "op_alu", which holds its previous value in one or more paths through the process File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Warning (10631): VHDL Process Statement warning at controller.vhd(98): inferring latch(es) for signal or variable "imm_signed", which holds its previous value in one or more paths through the process File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "imm_signed" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "op_alu[0]" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "op_alu[1]" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "op_alu[2]" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "op_alu[3]" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "op_alu[4]" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (10041): Inferred latch for "op_alu[5]" at controller.vhd(98) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/controller.vhd Line: 98
+Info (12128): Elaborating entity "IR" for hierarchy "CPU:inst|IR:IR_0"
+Info (12128): Elaborating entity "mux2x16" for hierarchy "CPU:inst|mux2x16:mux_addr"
+Info (12128): Elaborating entity "PC" for hierarchy "CPU:inst|PC:PC_0"
+Warning (10631): VHDL Process Statement warning at PC.vhd(28): inferring latch(es) for signal or variable "address", which holds its previous value in one or more paths through the process File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 28
+Info (10041): Inferred latch for "address[0]" at PC.vhd(28) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 28
+Info (10041): Inferred latch for "address[1]" at PC.vhd(28) File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/PC.vhd Line: 28
+Info (12128): Elaborating entity "ALU" for hierarchy "CPU:inst|ALU:alu_0"
+Info (12128): Elaborating entity "multiplexer" for hierarchy "CPU:inst|ALU:alu_0|multiplexer:multiplexer_0"
+Info (12128): Elaborating entity "add_sub" for hierarchy "CPU:inst|ALU:alu_0|add_sub:add_sub_0"
+Info (12128): Elaborating entity "comparator" for hierarchy "CPU:inst|ALU:alu_0|comparator:comparator_0"
+Info (12128): Elaborating entity "logic_unit" for hierarchy "CPU:inst|ALU:alu_0|logic_unit:logic_unit_0"
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(18): signal "a" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 18
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(18): signal "b" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 18
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(19): signal "a" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 19
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(19): signal "b" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 19
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(20): signal "a" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 20
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(20): signal "b" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 20
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(21): signal "a" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 21
+Warning (10492): VHDL Process Statement warning at logic_unit.vhd(21): signal "b" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/logic_unit.vhd Line: 21
+Info (12128): Elaborating entity "shift_unit" for hierarchy "CPU:inst|ALU:alu_0|shift_unit:shift_unit_0"
+Warning (10541): VHDL Signal Declaration warning at shift_unit.vhd(10): used implicit default value for signal "r" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/shift_unit.vhd Line: 10
+Info (12128): Elaborating entity "register_file" for hierarchy "CPU:inst|register_file:register_file_0"
+Info (12128): Elaborating entity "mux2x5" for hierarchy "CPU:inst|mux2x5:mux_aw"
+Info (12128): Elaborating entity "mux2x32" for hierarchy "CPU:inst|mux2x32:mux_data"
+Info (12128): Elaborating entity "extend" for hierarchy "CPU:inst|extend:extend_0"
+Info (12128): Elaborating entity "ROM" for hierarchy "ROM:ROM_0"
+Warning (10036): Verilog HDL or VHDL warning at ROM.vhd(18): object "s_dff1_current" assigned a value but never read File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM.vhd Line: 18
+Info (12128): Elaborating entity "ROM_Block" for hierarchy "ROM:ROM_0|ROM_Block:memory_Block" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM.vhd Line: 34
+Info (12128): Elaborating entity "altsyncram" for hierarchy "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd Line: 85
+Info (12130): Elaborated megafunction instantiation "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd Line: 85
+Info (12133): Instantiated megafunction "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component" with the following parameter: File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/ROM_Block.vhd Line: 85
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "init_file" = "../quartus/ROM.hex"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+    Info (12134): Parameter "numwords_a" = "1024"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "widthad_a" = "10"
+    Info (12134): Parameter "width_a" = "32"
+    Info (12134): Parameter "width_byteena_a" = "1"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_rna1.tdf
+    Info (12023): Found entity 1: altsyncram_rna1 File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/quartus/db/altsyncram_rna1.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_rna1" for hierarchy "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
+Info (12128): Elaborating entity "RAM" for hierarchy "RAM:RAM_0"
+Warning (10036): Verilog HDL or VHDL warning at RAM.vhd(21): object "s_address" assigned a value but never read File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd Line: 21
+Info (12128): Elaborating entity "buttons" for hierarchy "buttons:buttons_0"
+Warning (276020): Inferred RAM node "CPU:inst|register_file:register_file_0|reg_rtl_0" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
+Warning (276020): Inferred RAM node "CPU:inst|register_file:register_file_0|reg_rtl_1" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
+Info (276014): Found 1 instances of uninferred RAM logic
+    Info (276007): RAM logic "RAM:RAM_0|reg" is uninferred due to asynchronous read logic File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/RAM.vhd Line: 18
+Info (19000): Inferred 2 megafunctions from design logic
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "CPU:inst|register_file:register_file_0|reg_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 32
+        Info (286033): Parameter WIDTHAD_A set to 5
+        Info (286033): Parameter NUMWORDS_A set to 32
+        Info (286033): Parameter WIDTH_B set to 32
+        Info (286033): Parameter WIDTHAD_B set to 5
+        Info (286033): Parameter NUMWORDS_B set to 32
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "CPU:inst|register_file:register_file_0|reg_rtl_1" 
+        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 32
+        Info (286033): Parameter WIDTHAD_A set to 5
+        Info (286033): Parameter NUMWORDS_A set to 32
+        Info (286033): Parameter WIDTH_B set to 32
+        Info (286033): Parameter WIDTHAD_B set to 5
+        Info (286033): Parameter NUMWORDS_B set to 32
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+Info (12130): Elaborated megafunction instantiation "CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0"
+Info (12133): Instantiated megafunction "CPU:inst|register_file:register_file_0|altsyncram:reg_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "32"
+    Info (12134): Parameter "WIDTHAD_A" = "5"
+    Info (12134): Parameter "NUMWORDS_A" = "32"
+    Info (12134): Parameter "WIDTH_B" = "32"
+    Info (12134): Parameter "WIDTHAD_B" = "5"
+    Info (12134): Parameter "NUMWORDS_B" = "32"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_trd1.tdf
+    Info (12023): Found entity 1: altsyncram_trd1 File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/quartus/db/altsyncram_trd1.tdf Line: 27
+Warning (13034): The following nodes have both tri-state and non-tri-state drivers
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[0]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[22]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[23]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[24]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[25]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[26]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[9]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[3]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[2]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[4]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[6]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[8]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[10]" and its non-tri-state driver.
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[8]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[2]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[7]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[1]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[6]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[10]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[4]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[11]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[5]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[12]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[13]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[14]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[15]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[16]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[17]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[18]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[19]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[20]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+    Warning (13035): Inserted always-enabled tri-state buffer between "CPU:inst|IR:IR_0|Q[21]" and its non-tri-state driver. File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[0]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[0]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[22]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[22]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[23]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[23]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[24]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[24]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[25]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[25]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[26]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[26]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[9]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[9]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[3]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[3]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[2]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[27]"
+Error (13076): The node "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[4]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[28]"
+Error (13076): The node "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[6]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[29]"
+Error (13076): The node "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[8]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[30]"
+Error (13076): The node "CPU:inst|register_file:register_file_0|reg_rtl_0_bypass[10]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[31]"
+Error (13076): The node "CPU:inst|IR:IR_0|Q[8]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[8]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[2]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[2]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[7]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[7]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[1]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[1]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[6]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[6]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[10]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[10]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[4]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[4]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[11]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[11]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[5]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[5]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[12]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[12]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[13]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[13]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[14]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[14]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[15]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[15]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[16]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[16]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[17]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[17]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[18]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[18]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[19]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[19]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[20]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[20]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error (13076): The node "CPU:inst|IR:IR_0|Q[21]" has multiple drivers due to the non-tri-state driver "ROM:ROM_0|ROM_Block:memory_Block|altsyncram:altsyncram_component|altsyncram_rna1:auto_generated|q_a[21]" File: D:/Users/Anirudhh/Documents/EPFL/BA3/Comparch/Labs/Lab4/template/vhdl/IR.vhd Line: 17
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 32 errors, 50 warnings
+    Error: Peak virtual memory: 4942 megabytes
+    Error: Processing ended: Tue Oct 26 23:54:11 2021
+    Error: Elapsed time: 00:00:36
+    Error: Total CPU time (on all processors): 00:00:50
 
 
