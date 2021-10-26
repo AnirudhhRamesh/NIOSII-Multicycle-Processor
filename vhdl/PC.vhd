@@ -33,11 +33,15 @@ begin
         address <= std_logic_vector(to_unsigned(0,16));
       elsif( rising_edge(clk) ) then
         if (en = '1') then
+          if (add_imm = '1') then
+            address <= address + imm;
+          else
             address <= address + std_logic_vector(to_unsigned(4,16));
+          end if;
         end if;
       end if ;
     end process ; -- PC
 
-    addr <= X"0000" & address; --sets 0s to address 31..16
+    addr <= X"0000" & address when sel_imm = '0' else '00000000000000' & std_logic_vector(shift_left(signed(imm), 2)); --sets 0s to address 31..16
 
 end synth;
