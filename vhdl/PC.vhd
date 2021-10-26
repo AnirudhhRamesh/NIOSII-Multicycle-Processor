@@ -23,7 +23,7 @@ architecture synth of PC is
 	 
 begin
     
-    addr <= X"0000" & address; --sets 0s to address 31..16
+    --addr <= X"0000" & address; --sets 0s to address 31..16
     
     PC : process( clk, reset_n )
     begin
