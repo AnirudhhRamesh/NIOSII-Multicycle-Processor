@@ -1,0 +1,12 @@
+
+State Machine - |GECKO|CPU:inst|controller:controller_0|s_cur_state
+Name s_cur_state.BREAK s_cur_state.STORE s_cur_state.LOAD2 s_cur_state.LOAD1 s_cur_state.R_OP s_cur_state.I_OP s_cur_state.DECODE s_cur_state.FETCH2 s_cur_state.FETCH1 
+s_cur_state.FETCH1 0 0 0 0 0 0 0 0 0 
+s_cur_state.FETCH2 0 0 0 0 0 0 0 1 1 
+s_cur_state.DECODE 0 0 0 0 0 0 1 0 1 
+s_cur_state.I_OP 0 0 0 0 0 1 0 0 1 
+s_cur_state.R_OP 0 0 0 0 1 0 0 0 1 
+s_cur_state.LOAD1 0 0 0 1 0 0 0 0 1 
+s_cur_state.LOAD2 0 0 1 0 0 0 0 0 1 
+s_cur_state.STORE 0 1 0 0 0 0 0 0 1 
+s_cur_state.BREAK 1 0 0 0 0 0 0 0 1 

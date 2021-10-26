@@ -33,16 +33,6 @@ begin
         end if;
     end process;
 
-
-    --rddata <= reg(to_integer(unsigned(address))) when (s_cs = '1' and s_read = '1') else (others => 'Z');
-
-    read_proc: process(s_cs,s_read,s_address)
-    begin
-        if s_cs = '1' and s_read = '1' then
-            rddata <= reg(to_integer(unsigned(address)));
-            else 
-            rddata <= (others => 'Z');
-        end if;
-    end process;
+    rddata <= reg(to_integer(unsigned(address))) when (s_cs = '1' and s_read = '1') else (others => 'Z');
 
 end synth;

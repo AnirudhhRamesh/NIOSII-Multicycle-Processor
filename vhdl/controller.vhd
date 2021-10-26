@@ -41,86 +41,86 @@ architecture synth of controller is
     type stateType is (FETCH1, FETCH2, DECODE, I_OP, R_OP, LOAD1, LOAD2, STORE, BREAK);
     signal s_cur_state, s_next_state: stateType;
 
+    signal opcode, opxcode : std_logic_vector(7 downto 0);
+
 begin
 
-	 --FETCH 1
-    --read <= '1' when s_cur_state == FETCH1 else '0';
+    branch_op <= '0';
+    pc_add_imm <= '0';
+    pc_sel_a <= '0';
+    pc_sel_imm <= '0';
+    sel_pc <= '0';
+    sel_ra <= '0';
 
-    --FETCH 2
+    opcode <= "00" & op; --Append to MSB or LSB?
+    opxcode <= "00" & opx; --Append to MSB or LSB?
+
+    --pc_en: Enables PC
     pc_en <= '1' when (s_cur_state = FETCH2) else '0';
+
+    --ir_en: Enables Instruction Register (IR)
     ir_en <= '1' when (s_cur_state = FETCH2) else '0';
-	 
+
+    --rf_wren: Register file enable
+    rf_wren <= '1' when (s_cur_state = I_OP) else 
+               '1' when (s_cur_state = R_OP) else 
+               '1' when (s_cur_state = LOAD2) else '0';
+
+    --sel_addr: 
+    sel_addr <= '1' when (s_cur_state = LOAD1) else 
+                '1' when (s_cur_state = STORE) else '0';
+
+    --sel_b: Imm value if I_OP, else B register if R_OP
+    sel_b <= '0' when (s_cur_state = I_OP) else 
+             '1' when (s_cur_state = R_OP) else
+             '1' when (s_cur_state = BREAK) else
+             '0' when (s_cur_state = STORE) else '0';
+
+    --sel_mem
+    sel_mem <= '1' when (s_cur_state = LOAD2) else '0';
+
+    --sel_rC: Selects write address (aw). Either B if I_OP, else C if R_OP
+    sel_rC <= '0' when (s_cur_state = I_OP) else
+              '1' when (s_cur_state = R_OP) else '0';
+
+    --read
+    read <= '1' when (s_cur_state = FETCH1) else 
+            '1' when (s_cur_state = LOAD1) else '0';
+
+    --write
+    write <= '1' when (s_cur_state = STORE) else '0';
+    
+    --Other things
+    --imm_signed
+    --op_alu
+
+    --I-Type Operations
+    switches : process( opcode, opxcode )
+    begin
+        case opcode is
+            when x"04" => op_alu <= "000---"; imm_signed <= '1'; --addi rB, rA, imm => rB = rA + (signed)imm
+            when others =>
+        end case;
+    
+        --R-Type Operations
+        case opxcode is
+            when x"0E" => op_alu <= "10--01"; imm_signed <= '0'; --and rC, rA, rB R OP R-type 0x3A 0x0E rC ← rA AND rB
+            when x"1B" => op_alu <= "11-011"; imm_signed <= '0'; --srl rC, rA, rB R OP R-type 0x3A 0x1B rC ← (unsigned)rA  rB4..0
+            when x"34" => --BREAK
+            when others =>
+        end case;
+    end process ; -- switches
+    
     controller : process( clk, reset_n )
     begin
       if( reset_n = '0' ) then
-        read <= '1';
+        s_cur_state <= FETCH1;
       elsif( rising_edge(clk) ) then
         s_cur_state <= s_next_state;
-         case( s_cur_state ) is
-            when FETCH1 => read <= '1';
-            when I_OP => -- I_OP
-                sel_b <= '0'; --Take immediate value
-                sel_rC <= '1'; --B is destination write address (aw)
-                rf_wren <= '1';
-
-                case( op ) is
-                    when x"04" => --addi rB, rA, imm => rB = rA + (signed)imm
-                        --op_alu <= "000---" --addition
-                        imm_signed <= '1';
-                    when others =>
-                        rf_wren <= '0';
-                        imm_signed <= '0';
-                end case ;
-            when R_OP => --R_OP
-                sel_b <= '1'; --Take register value
-                sel_rC <= '0'; --C is destination write address (aw)
-                rf_wren <= '1';
-
-                case( opx ) is
-                    when x"0E" => --and rC, rA, rB R OP R-type 0x3A 0x0E rC ← rA AND rB
-                        --op_alu <= "10--01";
-                        imm_signed <= '0';
-                    when x"1B" => --srl rC, rA, rB R OP R-type 0x3A 0x1B rC ← (unsigned)rA  rB4..0
-                        --op_alu <= "11-011";
-                        imm_signed <= '0';
-                    when others =>
-                end case ;
-
-            when LOAD1 => --LOAD1
-                    sel_addr <= '1'; --Select memory address from ALU result
-                    read <= '1';
-                    --op_alu <= "000---";
-                    imm_signed <= '1';
-                    sel_b <= '0';
-
-
-            when LOAD2 => --LOAD2
-                    read <= '0';
-                    sel_mem <= '1'; --write the data from the memory (with address A + (signed)imm)
-            
-            when STORE => --STORE
-                    sel_addr <= '1';
-                    write <= '1';
-                    --op_alu <= "000---";
-                    imm_signed <= '1';
-                    sel_b <= '0';
-
-            when BREAK => --BREAK, do nothing
-                    case( opx ) is
-                        when x"34" => --Stop program execution    
-                        when others =>
-                    end case ;
-            when others =>
-                    rf_wren <= '0';
-         end case ;
-
       end if ;
     end process ; -- controller
-    
-    --stateless
-    --op_alu <= op + opx --This is placeholder (obviously wrong)
 
-    transition : process( s_cur_state, op, opx )
+    transition : process( s_cur_state, opcode, opxcode )
     begin
         case( s_cur_state ) is
             when FETCH1 =>
@@ -128,9 +128,9 @@ begin
             when FETCH2 =>
                 s_next_state <= DECODE;
             when DECODE =>
-                case( op ) is
+                case( opcode ) is
                     when x"3A" => 
-                        if (opx = x"34") then s_next_state <= BREAK; --BREAK
+                        if (opxcode = x"34") then s_next_state <= BREAK; --BREAK
                             else s_next_state <= R_OP; --R_OP
                         end if;
                     
