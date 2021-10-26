@@ -36,18 +36,16 @@ begin
       elsif( rising_edge(clk) ) then
         if (en = '1') then
           if (add_imm = '1') then
-            address <= address + imm;
+            address <= address + imm; 
+          elsif (sel_a = '1') then
+            address <= a;
           else
-            address <= address + std_logic_vector(to_unsigned(4,16));
+            address <= address + std_logic_vector(to_unsigned(4,16));    
           end if;
         end if;
       end if ;
     end process ; -- PC
 
-<<<<<<< HEAD
-    addr <= X"0000" & address when sel_imm = '0' else '00000000000000' & std_logic_vector(shift_left(signed(imm), 2)); --sets 0s to address 31..16
-=======
-    
->>>>>>> 5986383f68fc9abbdc793c81161c22a7b0241b50
+    addr <= X"0000" & address when sel_imm = '0' else "00000000000000" & std_logic_vector(shift_left(signed(imm), 2)); --sets 0s to address 31..16
 
 end synth;
