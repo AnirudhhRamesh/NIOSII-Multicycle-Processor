@@ -14,5 +14,5 @@ begin
     with signed select imm32 <=
     std_logic_vector(resize(unsigned(imm16), imm32'length)) when '0',
     std_logic_vector(resize(signed(imm16), imm32'length)) when '1',
-    (others=> '0') when others;
+    to_unsigned(0,32) when others;
 end synth;
