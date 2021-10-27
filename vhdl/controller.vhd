@@ -61,6 +61,7 @@ begin
 
     --rf_wren: Register file enable
     rf_wren <= '1' when (s_cur_state = I_OP) else 
+               '1' when (s_cur_state = IMM) else 
                '1' when (s_cur_state = R_OP) else 
                '1' when (s_cur_state = LOAD2) else 
                '1' when (s_cur_state = CALL) else 
@@ -73,8 +74,8 @@ begin
 
     --sel_b: Imm value if I_OP, else B register if R_OP
     sel_b <= '0' when (s_cur_state = I_OP) else 
+             '0' when (s_cur_state = IMM) else
              '1' when (s_cur_state = R_OP) else
-             '1' when (s_cur_state = BREAK) else
              '1' when (s_cur_state = BRANCH) else
              '0' when (s_cur_state = STORE) else 
              '0' when (s_cur_state = SHIFT) else '0';
@@ -84,8 +85,8 @@ begin
 
     --sel_rC: Selects write address (aw). Either B if I_OP, else C if R_OP
     sel_rC <= '0' when (s_cur_state = I_OP) else
+              '0' when (s_cur_state = IMM) else
               '1' when (s_cur_state = R_OP) else 
-              '1' when (s_cur_state = BREAK) else 
               '1' when (s_cur_state = SHIFT) else '0';
 
     --read
@@ -117,9 +118,11 @@ begin
     sel_ra <= '1' when (s_cur_state = CALL) else 
               '1' when (s_cur_state = CALLR) else '0';
 
-    --Other things
     --imm_signed
-    --op_alu
+    --imm_signed <= '1' when (s_cur_state = I_OP) else
+    --              '0' when (s_cur_state = IMM) else
+    --              '1' when (s_cur_state = R_OP and opxcode = x"3B") else 
+    --              '1' when (s_cur_state = SHIFT and opxcode = x"3A") else '0';
 
     --I-Type Operations
     switches : process( opcode, opxcode )
@@ -128,16 +131,16 @@ begin
             --I_OP Operations
             when x"04" => s_op_alu <= "000"; imm_signed <= '1'; --I_OP: addi rB, rA, imm => rB = rA + (signed)imm
 
-            when x"0C" => s_op_alu <= "100"; imm_signed <= '0';
-            when x"14" => s_op_alu <= "100"; imm_signed <= '0';
-            when x"1C" => s_op_alu <= "100"; imm_signed <= '0';
-
-            when x"08" => s_op_alu <= "011"; imm_signed <= '1'; 
+            when x"08" => s_op_alu <= "011"; imm_signed <= '1'; --I_OP operations
             when x"10" => s_op_alu <= "011"; imm_signed <= '1';
             when x"18" => s_op_alu <= "011"; imm_signed <= '1';
             when x"20" => s_op_alu <= "011"; imm_signed <= '1';
 
-            when x"28" => s_op_alu <= "011"; imm_signed <= '0';  --TODO: Error here: 011000 instead of 011001
+            when x"0C" => s_op_alu <= "100"; imm_signed <= '0'; --IMM operations
+            when x"14" => s_op_alu <= "100"; imm_signed <= '0';
+            when x"1C" => s_op_alu <= "100"; imm_signed <= '0';
+
+            when x"28" => s_op_alu <= "011"; imm_signed <= '0';  --IMM Operations
             when x"30" => s_op_alu <= "011"; imm_signed <= '0';
 
             --BRANCH Operations
@@ -201,7 +204,7 @@ begin
         end case;
     end process ; -- switches
 
-    op_alu <= s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = BREAK or s_cur_state = SHIFT) else
+    op_alu <= s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = SHIFT) else
               "011100" when (opcode = x"06") else --unconditional branch verifies A (x00) == B (x00)
               s_op_alu & opcode(5 downto 3);
     
@@ -240,6 +243,8 @@ begin
                     when x"0C" => s_next_state <= IMM;
                     when x"14" => s_next_state <= IMM;
                     when x"1C" => s_next_state <= IMM;
+                    when x"28" => s_next_state <= IMM;
+                    when x"30" => s_next_state <= IMM;
 
                     when x"06" => s_next_state <= BRANCH;
                     when x"0E" => s_next_state <= BRANCH;
