@@ -48,6 +48,6 @@ begin
       end if ;
     end process ; -- PC
 
-    addr <= X"0000" & address; --sets 0s to address 31..16
+    addr <= X"0000" & address(15 downto 2) & "00"; --sets 0s to address 31..16
 
 end synth;

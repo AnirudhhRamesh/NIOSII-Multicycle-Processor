@@ -119,103 +119,59 @@ begin
               '1' when (s_cur_state = CALLR) else '0';
 
     --imm_signed
-    --imm_signed <= '1' when (s_cur_state = I_OP) else
-    --              '0' when (s_cur_state = IMM) else
-    --              '1' when (s_cur_state = R_OP and opxcode = x"3B") else 
-    --              '1' when (s_cur_state = SHIFT and opxcode = x"3A") else '0';
-
     imm_signed <= '1' when (s_cur_state = I_OP) else
                   '1' when (s_cur_state = LOAD1) else
                   '1' when (s_cur_state = STORE) else '0';
     
+    --s_op_alu
+    s_op_alu <= --I_OP
+                "000" when (opcode = x"04") else
+                "011" when (opcode = x"08") else
+                "011" when (opcode = x"10") else
+                "011" when (opcode = x"18") else
+                "011" when (opcode = x"20") else
+                --IMM
+                "100" when (opcode = x"0C") else --andi
+                "100" when (opcode = x"14") else --ori
+                "100" when (opcode = x"1C") else --xnori
+                "011" when (opcode = x"28") else --cmpleui
+                "011" when (opcode = x"30") else --compgtui
+                --BRANCH
+                "011" when (opcode = x"06") else
+                "011" when (opcode = x"0E") else
+                "011" when (opcode = x"16") else
+                "011" when (opcode = x"1E") else
+                "011" when (opcode = x"26") else
+                "011" when (opcode = x"2E") else
+                "011" when (opcode = x"36") else
 
-    --I-Type Operations
-    switches : process( opcode, opxcode )
-    begin
-        case opcode is
-            --I_OP Operations
-            when x"04" => s_op_alu <= "000"; --imm_signed <= '1'; --I_OP: addi rB, rA, imm => rB = rA + (signed)imm
+                --R_OP
+                "000" when (opcode = x"3A" and opxcode = x"31") else
+                "001" when (opcode = x"3A" and opxcode = x"39") else
+                "011" when (opcode = x"3A" and opxcode = x"08") else
+                "011" when (opcode = x"3A" and opxcode = x"10") else
+                "100" when (opcode = x"3A" and opxcode = x"06") else
+                "100" when (opcode = x"3A" and opxcode = x"0E") else
+                "100" when (opcode = x"3A" and opxcode = x"16") else
+                "100" when (opcode = x"3A" and opxcode = x"1E") else
+                "110" when (opcode = x"3A" and opxcode = x"13") else
+                "110" when (opcode = x"3A" and opxcode = x"1B") else
+                "110" when (opcode = x"3A" and opxcode = x"3B") else
+                "011" when (opcode = x"3A" and opxcode = x"18") else
+                "011" when (opcode = x"3A" and opxcode = x"20") else
+                "011" when (opcode = x"3A" and opxcode = x"28") else
+                "011" when (opcode = x"3A" and opxcode = x"30") else
+                "110" when (opcode = x"3A" and opxcode = x"03") else
+                "110" when (opcode = x"3A" and opxcode = x"0B") else
+                --SHIFT
+                "110" when (opcode = x"3A" and opxcode = x"12") else
+                "110" when (opcode = x"3A" and opxcode = x"1A") else
+                "110" when (opcode = x"3A" and opxcode = x"3A") else
+                "110" when (opcode = x"3A" and opxcode = x"02") else "000";
 
-            when x"08" => s_op_alu <= "011"; --imm_signed <= '1'; --I_OP operations
-            when x"10" => s_op_alu <= "011"; --imm_signed <= '1';
-            when x"18" => s_op_alu <= "011"; --imm_signed <= '1';
-            when x"20" => s_op_alu <= "011"; --imm_signed <= '1';
 
-            when x"0C" => s_op_alu <= "100"; --imm_signed <= '0'; --IMM operations
-            when x"14" => s_op_alu <= "100"; --imm_signed <= '0';
-            when x"1C" => s_op_alu <= "100"; --imm_signed <= '0';
-
-            when x"28" => s_op_alu <= "011"; --imm_signed <= '0';  --IMM Operations
-            when x"30" => s_op_alu <= "011"; --imm_signed <= '0';
-
-            --BRANCH Operations
-            when x"06" => s_op_alu <= "011"; --BRANCH: br jumps to label if: no condition (check that rA = rB since A and B = x00)
-            when x"0E" => s_op_alu <= "011"; --BRANCH: ble jumps to label if: rA <= rB
-            when x"16" => s_op_alu <= "011"; --BRANCH: bgt jumps to label if: rA > rB
-            when x"1E" => s_op_alu <= "011"; --BRANCH: bne jumps to label if: rA != rB
-            when x"26" => s_op_alu <= "011"; --BRANCH: beq jumps to label if: rA = rB
-            when x"2E" => s_op_alu <= "011"; --BRANCH: bleu jumps to label if: (unsigned) rA <= (unsigned) rB
-            when x"36" => s_op_alu <= "011"; --BRANCH: bgtu jumps to label if: (unsigned) rA > (unsigned) rB
-
-            --CALL Operations
-            when x"00" => --CALL: call
-
-            --JMPI Operations
-            when x"01" => --JMPI: jmpi
-
-            --STORE
-            when x"15" => s_op_alu <= "000";
-
-            --LOAD
-            when x"17" => s_op_alu <= "000";
-            when others =>
-        end case;
-    
-        --R-Type Operations
-        case opxcode is
-            --R_OP Operations
-            when x"31" => s_op_alu <= "000";
-            when x"39" => s_op_alu <= "001";
-            when x"08" => s_op_alu <= "011"; --TODO: Error here: 011000 instead of 011001
-            when x"10" => s_op_alu <= "011";
-            when x"06" => s_op_alu <= "100";
-            when x"0E" => s_op_alu <= "100";
-            when x"16" => s_op_alu <= "100";
-            when x"1E" => s_op_alu <= "100";
-            when x"13" => s_op_alu <= "110";
-            when x"1B" => s_op_alu <= "110"; --imm_signed <= '0';
-            when x"3B" => s_op_alu <= "110"; --imm_signed <= '1';
-
-            when x"18" => s_op_alu <= "011";
-            when x"20" => s_op_alu <= "011";
-            when x"28" => s_op_alu <= "011"; --imm_signed <= '0';
-            when x"30" => s_op_alu <= "011"; --imm_signed <= '0';
-            when x"03" => s_op_alu <= "110";
-            when x"0B" => s_op_alu <= "110";
-
-            --SHIFT Operations
-            when x"12" => s_op_alu <= "110";
-            when x"1A" => s_op_alu <= "110"; --imm_signed <= '0';
-            when x"3A" => s_op_alu <= "110"; --imm_signed <= '1';
-
-            when x"02" => s_op_alu <= "110";
-
-            --CALLR Operations
-            when x"1D" => --CALLR: callr
-
-            --JMP Operations
-            when x"0D" => --JMP: jmp
-            when x"05" => --JMP: ret
-
-            --BREAK Operation
-            when x"34" => --BREAK
-
-            when others =>
-        end case;
-    end process ; -- switches
-
-    op_alu <= s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = SHIFT) else
-              "011100" when (opcode = x"06") else --unconditional branch verifies A (x00) == B (x00)
+    op_alu <= "011100" when (opcode = x"06" and s_cur_state = BRANCH) else --unconditional branch
+              s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = SHIFT) else
               s_op_alu & opcode(5 downto 3);
     
     controller : process( clk, reset_n )
