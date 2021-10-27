@@ -38,7 +38,7 @@ end controller;
 
 architecture synth of controller is
 
-    type stateType is (FETCH1, FETCH2, DECODE, I_OP, R_OP, LOAD1, LOAD2, STORE, BREAK, BRANCH, CALL, CALLR, JMP, JMPI);
+    type stateType is (FETCH1, FETCH2, DECODE, I_OP, R_OP, LOAD1, LOAD2, STORE, BREAK, BRANCH, CALL, CALLR, JMP, JMPI, IMM, SHIFT);
     signal s_cur_state, s_next_state: stateType;
 
     signal opcode, opxcode : std_logic_vector(7 downto 0);
@@ -46,15 +46,8 @@ architecture synth of controller is
 
 begin
 
-    branch_op <= '0';
-    pc_add_imm <= '0';
-    pc_sel_a <= '0';
-    pc_sel_imm <= '0';
-    sel_pc <= '0';
-    sel_ra <= '0';
-
-    opcode <= "00" & op; --Append to MSB or LSB?
-    opxcode <= "00" & opx; --Append to MSB or LSB?
+    opcode <= "00" & op;
+    opxcode <= "00" & opx;
 
     --pc_en: Enables PC
     pc_en <= '1' when (s_cur_state = FETCH2) else 
@@ -68,10 +61,12 @@ begin
 
     --rf_wren: Register file enable
     rf_wren <= '1' when (s_cur_state = I_OP) else 
+               '1' when (s_cur_state = IMM) else 
                '1' when (s_cur_state = R_OP) else 
                '1' when (s_cur_state = LOAD2) else 
                '1' when (s_cur_state = CALL) else 
-               '1' when (s_cur_state = CALLR) else '0';
+               '1' when (s_cur_state = CALLR) else 
+               '1' when (s_cur_state = SHIFT) else '0';
 
     --sel_addr: 
     sel_addr <= '1' when (s_cur_state = LOAD1) else 
@@ -79,18 +74,20 @@ begin
 
     --sel_b: Imm value if I_OP, else B register if R_OP
     sel_b <= '0' when (s_cur_state = I_OP) else 
+             '0' when (s_cur_state = IMM) else
              '1' when (s_cur_state = R_OP) else
-             '1' when (s_cur_state = BREAK) else
              '1' when (s_cur_state = BRANCH) else
-             '0' when (s_cur_state = STORE) else '0';
+             '0' when (s_cur_state = STORE) else 
+             '0' when (s_cur_state = SHIFT) else '0';
 
     --sel_mem
     sel_mem <= '1' when (s_cur_state = LOAD2) else '0';
 
     --sel_rC: Selects write address (aw). Either B if I_OP, else C if R_OP
     sel_rC <= '0' when (s_cur_state = I_OP) else
+              '0' when (s_cur_state = IMM) else
               '1' when (s_cur_state = R_OP) else 
-              '1' when (s_cur_state = BREAK) else '0';
+              '1' when (s_cur_state = SHIFT) else '0';
 
     --read
     read <= '1' when (s_cur_state = FETCH1) else 
@@ -121,40 +118,65 @@ begin
     sel_ra <= '1' when (s_cur_state = CALL) else 
               '1' when (s_cur_state = CALLR) else '0';
 
-    --Other things
     --imm_signed
-    --op_alu
+    --imm_signed <= '1' when (s_cur_state = I_OP) else
+    --              '0' when (s_cur_state = IMM) else
+    --              '1' when (s_cur_state = R_OP and opxcode = x"3B") else 
+    --              '1' when (s_cur_state = SHIFT and opxcode = x"3A") else '0';
+
+    imm_signed <= '1' when (opcode = x"04") else
+                  '1' when (opcode = x"08") else
+                  '1' when (opcode = x"10") else
+                  '1' when (opcode = x"18") else
+                  '1' when (opcode = x"20") else
+
+                  '1' when (opxcode = x"3B") else
+                  '1' when (opxcode = x"3A") else '0';
+
+    s_op_alu <= "000" when (opcode = x"04") else
+                "011" when (opcode = x"08") else
+                "011" when (opcode = x"10") else
+                "011" when (opcode = x"18") else
+                "011" when (opcode = x"20") else
+                "100" when (opcode = x"0C") else
+                "100" when (opcode = x"14") else
+                "100" when (opcode = x"1C") else
+                "011" when (opcode = x"28") else
+                "011" when (opcode = x"30") else
+                "011" when (opcode = x"06") else
+                "011" when (opcode = x"0E") else
+                "011" when (opcode = x"16") else
+                "011" when (opcode = x"1E") else
+                "011" when (opcode = x"26") else
+                "011" when (opcode = x"2E") else
+                "011" when (opcode = x"36") else
+
+                "000" when (opxcode = x"31") else
+                "001" when (opxcode = x"39") else
+                "011" when (opxcode = x"08") else
+                "011" when (opxcode = x"10") else
+                "100" when (opxcode = x"06") else
+                "100" when (opxcode = x"0E") else
+                "100" when (opxcode = x"16") else
+                "100" when (opxcode = x"1E") else
+                "110" when (opxcode = x"13") else
+                "110" when (opxcode = x"1B") else
+                "110" when (opxcode = x"3B") else
+                "011" when (opxcode = x"18") else
+                "011" when (opxcode = x"20") else
+                "011" when (opxcode = x"28") else
+                "011" when (opxcode = x"30") else
+                "110" when (opxcode = x"03") else
+                "110" when (opxcode = x"0B") else
+                "110" when (opxcode = x"12") else
+                "110" when (opxcode = x"1A") else
+                "110" when (opxcode = x"3A") else
+                "110" when (opxcode = x"02") else "000"
 
     --I-Type Operations
-    switches : process( opcode, opxcode )
-    begin
-        case opcode is
-            when x"04" => s_op_alu <= "000"; imm_signed <= '1'; --I_OP: addi rB, rA, imm => rB = rA + (signed)imm
-            when x"06" => s_op_alu <= "011"; --BRANCH: br jumps to label if: no condition (check that rA = rB since A and B = x00)
-            when x"0E" => s_op_alu <= "011"; --BRANCH: ble jumps to label if: rA <= rB
-            when x"16" => s_op_alu <= "011"; --BRANCH: bgt jumps to label if: rA > rB
-            when x"1E" => s_op_alu <= "011"; --BRANCH: bne jumps to label if: rA != rB
-            when x"26" => s_op_alu <= "011"; --BRANCH: beq jumps to label if: rA = rB
-            when x"2E" => s_op_alu <= "011"; --BRANCH: bleu jumps to label if: (unsigned) rA <= (unsigned) rB
-            when x"36" => s_op_alu <= "011"; --BRANCH: bgtu jumps to label if: (unsigned) rA > (unsigned) rB
-            when x"00" => --CALL: call
-            when x"01" => --JMPI: jmpi
-            when others =>
-        end case;
     
-        --R-Type Operations
-        case opxcode is
-            when x"0E" => s_op_alu <= "100"; imm_signed <= '0'; --R_OP: and rC, rA, rB R OP R-type 0x3A 0x0E rC ← rA AND rB
-            when x"1B" => s_op_alu <= "110"; imm_signed <= '0'; --R_OP: srl rC, rA, rB R OP R-type 0x3A 0x1B rC ← (unsigned)rA  rB4..0
-            when x"1D" => --CALLR: callr
-            when x"0D" => --JMP: jmp
-            when x"05" => --JMP: ret
-            when x"34" => --BREAK
-            when others =>
-        end case;
-    end process ; -- switches
 
-    op_alu <= s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = BREAK) else
+    op_alu <= s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = SHIFT) else
               "011100" when (opcode = x"06") else --unconditional branch verifies A (x00) == B (x00)
               s_op_alu & opcode(5 downto 3);
     
@@ -175,31 +197,56 @@ begin
             when DECODE =>
                 case( opcode ) is
                     when x"3A" => 
-			case (opxcode) is
-				when x"34" => s_next_state <= BREAK;
-				when x"1D" => s_next_state <= CALLR;
-				when x"05" => s_next_state <= JMP;
-				when x"0D" => s_next_state <= JMP;
-				when x"0E" => s_next_state <= R_OP;
-				when x"1B" => s_next_state <= R_OP;
-			end case;
+                        case (opxcode) is
+                            when x"34" => s_next_state <= BREAK;
+                            when x"1D" => s_next_state <= CALLR;
+                            when x"05" => s_next_state <= JMP;
+                            when x"0D" => s_next_state <= JMP;
+                            when x"12" => s_next_state <= SHIFT;
+                            when x"1A" => s_next_state <= SHIFT;
+                            when x"3A" => s_next_state <= SHIFT;
+                            when x"02" => s_next_state <= SHIFT;
+                            when others => s_next_state <= R_OP;
+                        end case;
                     when x"04" => s_next_state <= I_OP; --I_OP
-
                     when x"17" => s_next_state <= LOAD1; --LOAD
-
                     when x"15" => s_next_state <= STORE; --STORE
 
+                    when x"0C" => s_next_state <= IMM;
+                    when x"14" => s_next_state <= IMM;
+                    when x"1C" => s_next_state <= IMM;
+                    when x"28" => s_next_state <= IMM;
+                    when x"30" => s_next_state <= IMM;
+
                     when x"06" => s_next_state <= BRANCH;
+                    when x"0E" => s_next_state <= BRANCH;
+                    when x"16" => s_next_state <= BRANCH;
+                    when x"1E" => s_next_state <= BRANCH;
+                    when x"26" => s_next_state <= BRANCH;
+                    when x"2E" => s_next_state <= BRANCH;
+                    when x"36" => s_next_state <= BRANCH;
 
                     when x"00" => s_next_state <= CALL;
-
                     when x"01" => s_next_state <= JMPI;
-
                     when others => s_next_state <= BREAK;
                 end case ;
             when LOAD1 => s_next_state <= LOAD2;
             when BREAK => s_next_state <= BREAK;
-            when others => s_next_state <= FETCH1;
+            
+            when I_OP => s_next_state <= FETCH1;
+            when R_OP => s_next_state <= FETCH1;
+            when STORE => s_next_state <= FETCH1;
+
+            when BRANCH => s_next_state <= FETCH1;
+            when CALL => s_next_state <= FETCH1;
+            when CALLR => s_next_state <= FETCH1;
+            when JMP => s_next_state <= FETCH1;
+            when JMPI => s_next_state <= FETCH1;
+
+            when IMM => s_next_state <= FETCH1;
+            when SHIFT => s_next_state <= FETCH1;
+             
+            when others => s_next_state <= BREAK;
         end case ;
     end process ; -- transition
 end synth;

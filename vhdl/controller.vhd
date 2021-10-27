@@ -38,7 +38,7 @@ end controller;
 
 architecture synth of controller is
 
-    type stateType is (FETCH1, FETCH2, DECODE, I_OP, R_OP, LOAD1, LOAD2, STORE, BREAK, BRANCH, CALL, CALLR, JMP, JMPI, IMM, SHIFT);
+    type stateType is (FETCH1, FETCH2, DECODE, I_OP, R_OP, LOAD1, LOAD2, STORE, BREAK, BRANCH, CALL, CALLR, JMP, JMPI, IMM, SHIFT, DEBUG);
     signal s_cur_state, s_next_state: stateType;
 
     signal opcode, opxcode : std_logic_vector(7 downto 0);
@@ -124,24 +124,29 @@ begin
     --              '1' when (s_cur_state = R_OP and opxcode = x"3B") else 
     --              '1' when (s_cur_state = SHIFT and opxcode = x"3A") else '0';
 
+    imm_signed <= '1' when (s_cur_state = I_OP) else
+                  '1' when (s_cur_state = LOAD1) else
+                  '1' when (s_cur_state = STORE) else '0';
+    
+
     --I-Type Operations
     switches : process( opcode, opxcode )
     begin
         case opcode is
             --I_OP Operations
-            when x"04" => s_op_alu <= "000"; imm_signed <= '1'; --I_OP: addi rB, rA, imm => rB = rA + (signed)imm
+            when x"04" => s_op_alu <= "000"; --imm_signed <= '1'; --I_OP: addi rB, rA, imm => rB = rA + (signed)imm
 
-            when x"08" => s_op_alu <= "011"; imm_signed <= '1'; --I_OP operations
-            when x"10" => s_op_alu <= "011"; imm_signed <= '1';
-            when x"18" => s_op_alu <= "011"; imm_signed <= '1';
-            when x"20" => s_op_alu <= "011"; imm_signed <= '1';
+            when x"08" => s_op_alu <= "011"; --imm_signed <= '1'; --I_OP operations
+            when x"10" => s_op_alu <= "011"; --imm_signed <= '1';
+            when x"18" => s_op_alu <= "011"; --imm_signed <= '1';
+            when x"20" => s_op_alu <= "011"; --imm_signed <= '1';
 
-            when x"0C" => s_op_alu <= "100"; imm_signed <= '0'; --IMM operations
-            when x"14" => s_op_alu <= "100"; imm_signed <= '0';
-            when x"1C" => s_op_alu <= "100"; imm_signed <= '0';
+            when x"0C" => s_op_alu <= "100"; --imm_signed <= '0'; --IMM operations
+            when x"14" => s_op_alu <= "100"; --imm_signed <= '0';
+            when x"1C" => s_op_alu <= "100"; --imm_signed <= '0';
 
-            when x"28" => s_op_alu <= "011"; imm_signed <= '0';  --IMM Operations
-            when x"30" => s_op_alu <= "011"; imm_signed <= '0';
+            when x"28" => s_op_alu <= "011"; --imm_signed <= '0';  --IMM Operations
+            when x"30" => s_op_alu <= "011"; --imm_signed <= '0';
 
             --BRANCH Operations
             when x"06" => s_op_alu <= "011"; --BRANCH: br jumps to label if: no condition (check that rA = rB since A and B = x00)
@@ -158,6 +163,11 @@ begin
             --JMPI Operations
             when x"01" => --JMPI: jmpi
 
+            --STORE
+            when x"15" => s_op_alu <= "000";
+
+            --LOAD
+            when x"17" => s_op_alu <= "000";
             when others =>
         end case;
     
@@ -173,20 +183,20 @@ begin
             when x"16" => s_op_alu <= "100";
             when x"1E" => s_op_alu <= "100";
             when x"13" => s_op_alu <= "110";
-            when x"1B" => s_op_alu <= "110"; imm_signed <= '0';
-            when x"3B" => s_op_alu <= "110"; imm_signed <= '1';
+            when x"1B" => s_op_alu <= "110"; --imm_signed <= '0';
+            when x"3B" => s_op_alu <= "110"; --imm_signed <= '1';
 
             when x"18" => s_op_alu <= "011";
             when x"20" => s_op_alu <= "011";
-            when x"28" => s_op_alu <= "011"; imm_signed <= '0';
-            when x"30" => s_op_alu <= "011"; imm_signed <= '0';
+            when x"28" => s_op_alu <= "011"; --imm_signed <= '0';
+            when x"30" => s_op_alu <= "011"; --imm_signed <= '0';
             when x"03" => s_op_alu <= "110";
             when x"0B" => s_op_alu <= "110";
 
             --SHIFT Operations
             when x"12" => s_op_alu <= "110";
-            when x"1A" => s_op_alu <= "110"; imm_signed <= '0';
-            when x"3A" => s_op_alu <= "110"; imm_signed <= '1';
+            when x"1A" => s_op_alu <= "110"; --imm_signed <= '0';
+            when x"3A" => s_op_alu <= "110"; --imm_signed <= '1';
 
             when x"02" => s_op_alu <= "110";
 
@@ -222,44 +232,58 @@ begin
         case( s_cur_state ) is
             when FETCH1 => s_next_state <= FETCH2;
             when FETCH2 => s_next_state <= DECODE;
-            when DECODE =>
-                case( opcode ) is
-                    when x"3A" => 
-                        case (opxcode) is
-                            when x"34" => s_next_state <= BREAK;
-                            when x"1D" => s_next_state <= CALLR;
-                            when x"05" => s_next_state <= JMP;
-                            when x"0D" => s_next_state <= JMP;
-                            when x"12" => s_next_state <= SHIFT;
-                            when x"1A" => s_next_state <= SHIFT;
-                            when x"3A" => s_next_state <= SHIFT;
-                            when x"02" => s_next_state <= SHIFT;
-                            when others => s_next_state <= R_OP;
-                        end case;
-                    when x"04" => s_next_state <= I_OP; --I_OP
-                    when x"17" => s_next_state <= LOAD1; --LOAD
-                    when x"15" => s_next_state <= STORE; --STORE
-
-                    when x"0C" => s_next_state <= IMM;
-                    when x"14" => s_next_state <= IMM;
-                    when x"1C" => s_next_state <= IMM;
-                    when x"28" => s_next_state <= IMM;
-                    when x"30" => s_next_state <= IMM;
-
-                    when x"06" => s_next_state <= BRANCH;
-                    when x"0E" => s_next_state <= BRANCH;
-                    when x"16" => s_next_state <= BRANCH;
-                    when x"1E" => s_next_state <= BRANCH;
-                    when x"26" => s_next_state <= BRANCH;
-                    when x"2E" => s_next_state <= BRANCH;
-                    when x"36" => s_next_state <= BRANCH;
-
-                    when x"00" => s_next_state <= CALL;
-                    when x"01" => s_next_state <= JMPI;
-                    when others => s_next_state <= BREAK;
-                end case ;
+            
             when LOAD1 => s_next_state <= LOAD2;
             when BREAK => s_next_state <= BREAK;
+            
+            when DECODE =>
+                case( opcode ) is
+                    when x"04" => s_next_state <= I_OP; --
+
+                    when x"08" => s_next_state <= I_OP; --
+                    when x"10" => s_next_state <= I_OP; --
+                    when x"18" => s_next_state <= I_OP; --
+                    when x"20" => s_next_state <= I_OP; --
+
+                    when x"0C" => s_next_state <= IMM; --
+                    when x"14" => s_next_state <= IMM; --
+                    when x"1C" => s_next_state <= IMM; --
+
+                    when x"28" => s_next_state <= IMM; --
+                    when x"30" => s_next_state <= IMM; --
+                
+                    when x"17" => s_next_state <= LOAD1; --
+                    when x"15" => s_next_state <= STORE; --
+
+                    when x"06" => s_next_state <= BRANCH; --
+                    when x"0E" => s_next_state <= BRANCH; --
+                    when x"16" => s_next_state <= BRANCH; --
+                    when x"1E" => s_next_state <= BRANCH; --
+                    when x"26" => s_next_state <= BRANCH; --
+                    when x"2E" => s_next_state <= BRANCH; --
+                    when x"36" => s_next_state <= BRANCH; --
+
+                    when x"00" => s_next_state <= CALL; --
+                    when x"01" => s_next_state <= JMPI; --
+
+                    when x"3A" => 
+                        case (opxcode) is
+                            when x"34" => s_next_state <= BREAK; --
+                            when x"1D" => s_next_state <= CALLR; --
+                            when x"05" => s_next_state <= JMP; --
+                            when x"0D" => s_next_state <= JMP; --
+
+                            when x"12" => s_next_state <= SHIFT; --
+                            when x"1A" => s_next_state <= SHIFT; --
+                            when x"3A" => s_next_state <= SHIFT; --
+                            when x"02" => s_next_state <= SHIFT; --
+
+                            when others => s_next_state <= R_OP; --
+                        end case;
+                    
+                    when others => s_next_state <= DEBUG; --Find the sentinel state (eg extra state). Check for what instructions we get the sentinel state
+                end case ;
+
             when others => s_next_state <= FETCH1;
         end case ;
     end process ; -- transition
