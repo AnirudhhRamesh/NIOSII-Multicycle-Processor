@@ -169,9 +169,32 @@ begin
                 "110" when (opcode = x"3A" and opxcode = x"3A") else
                 "110" when (opcode = x"3A" and opxcode = x"02") else "000";
 
-
+    --op_alu is not working correctly for all R_TYPE signals
     op_alu <= "011100" when (opcode = x"06" and s_cur_state = BRANCH) else --unconditional branch
               s_op_alu & opxcode(5 downto 3) when (s_cur_state = R_OP or s_cur_state = CALLR or s_cur_state = JMP or s_cur_state = SHIFT) else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"31") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"39") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"08") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"10") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"06") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"0E") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"16") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"1E") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"13") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"1B") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"3B") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"18") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"20") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"28") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"30") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"03") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"0B") else
+              
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"12") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"1A") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"3A") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"02") else
+
               s_op_alu & opcode(5 downto 3);
     
     controller : process( clk, reset_n )
