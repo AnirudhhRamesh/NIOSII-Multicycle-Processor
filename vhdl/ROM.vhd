@@ -13,32 +13,33 @@ end ROM;
 
 architecture synth of ROM is
 
-    component ROM_Block is
-        port(
-            address		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
-            clock		: IN STD_LOGIC  := '1';
-            q		: OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
-        );
-    end component;
-
-Signal q : STD_LOGIC_VECTOR (31 DOWNTO 0);
-signal number_cycles : std_logic := '0';
-signal cs_and_read : std_logic;
-signal prev_address : STD_LOGIC_VECTOR (9 DOWNTO 0);
+	signal s_read_cs : std_logic;
+	signal s_rddata : std_logic_vector(31 downto 0);
+	
+	--ROM-Block component
+	component ROM_Block
+		PORT(
+		address		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		clock		: IN STD_LOGIC  := '1';
+		q		: OUT STD_LOGIC_VECTOR (31 DOWNTO 0));
+	end component;
 
 begin
-    ROM_Block_0: ROM_Block port map(
-        clock  => clk,
-        address  => address,
-        q => q
-    );
 
-    rddata <= (others => 'Z') when cs_and_read = '0' else q;
+	--ROM_Block port mapping
+	memory_Block: ROM_Block port map (
+		address => address,
+		clock => clk,
+		q => s_rddata);
 
-    rd: process (clk)
+    dff1 : process( clk )
     begin
-        if(rising_edge(clk)) then
-            cs_and_read <= cs and read;
+        if (rising_edge(clk)) then
+            s_read_cs <= read and cs;
         end if;
-    end process rd;
+    end process ; -- dff1
+		
+	--Tri-state buffer
+	rddata <= (others => 'Z') when s_read_cs = '0' else s_rddata;
+
 end synth;
