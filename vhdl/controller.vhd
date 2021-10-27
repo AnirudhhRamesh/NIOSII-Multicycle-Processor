@@ -195,6 +195,11 @@ begin
               s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"3A") else
               s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"02") else
 
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"1D") else
+
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"05") else
+              s_op_alu & opxcode(5 downto 3) when (opcode = x"3A" and opxcode = x"0D") else
+
               s_op_alu & opcode(5 downto 3);
     
     controller : process( clk, reset_n )
